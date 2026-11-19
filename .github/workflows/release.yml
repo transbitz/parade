@@ -74,7 +74,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Install build prerequisites
-        run: pacman -Sy --noconfirm --needed libarchive
+        run: pacman -Syu --noconfirm --needed libarchive
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
