@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <title>Parade</title>
+  <link rel="stylesheet" href="control.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Parade</h1>
+      <p>Control panel — device screens open in a separate window</p>
+    </header>
+
+    <main class="form">
+      <div class="field field-url">
+        <label for="urlInput">URL</label>
+        <div class="row">
+          <input id="urlInput" type="text" placeholder="https://example.com or http://localhost:3000" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="deviceSelect">Device</label>
+          <select id="deviceSelect"></select>
+        </div>
+
+        <div class="field">
+          <label for="orientationSelect">Orientation</label>
+          <select id="orientationSelect">
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="uaSelect">User Agent</label>
+          <select id="uaSelect">
+            <option value="default">Default</option>
+            <option value="iphone">iPhone</option>
+            <option value="android">Android</option>
+            <option value="ipad">iPad</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field custom-size hidden" id="customSizeGroup">
+        <label>Custom size (W × H)</label>
+        <div class="row inline">
+          <input id="customWidth" type="number" min="200" max="3000" value="390" aria-label="Width">
+          <span>×</span>
+          <input id="customHeight" type="number" min="200" max="3000" value="844" aria-label="Height">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="addBtn" class="primary">Add device</button>
+        <button id="goSelectedBtn">Go (selected)</button>
+        <button id="goAllBtn">Go all</button>
+      </div>
+      <div class="actions secondary-actions">
+        <button id="showDisplayBtn">Show device window</button>
+        <button id="clearBtn" class="danger">Clear all</button>
+      </div>
+
+      <div class="status" id="statusText">Ready</div>
+      <p class="hint">Each device opens at its exact screen size in the device window (side-by-side). Tap <strong>⋯</strong> on a screen for URL and device actions.</p>
+    </main>
+  </div>
+
+  <script src="control.js"></script>
+</body>
+</html>

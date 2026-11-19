@@ -1,0 +1,103 @@
+{
+  "name": "parade",
+  "productName": "Parade",
+  "version": "1.0.0",
+  "description": "Desktop multi-panel mobile device emulator for testing webapps side by side",
+  "main": "main.js",
+  "desktopName": "Parade",
+  "author": "transbitz",
+  "license": "MIT",
+  "homepage": "https://github.com/transbitz/parade#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/transbitz/parade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/transbitz/parade/issues"
+  },
+  "scripts": {
+    "start": "electron .",
+    "start:dev": "electron .",
+    "dist": "electron-builder --publish never",
+    "dist:linux": "electron-builder --linux --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.transbitz.parade",
+    "productName": "Parade",
+    "copyright": "© 2026 transbitz",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "view-preload.js",
+      "src/control.html",
+      "src/control.css",
+      "src/control.js",
+      "src/display.html",
+      "src/display.css",
+      "src/display.js",
+      "package.json"
+    ],
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "pacman"
+      ],
+      "category": "Development",
+      "maintainer": "transbitz <transbitz@users.noreply.github.com>",
+      "synopsis": "Multi-panel mobile device emulator for testing webapps side by side",
+      "executableName": "parade",
+      "syncDesktopName": true,
+      "desktop": {
+        "entry": {
+          "Name": "Parade",
+          "Comment": "Test webapps on multiple mobile device screens side by side",
+          "Categories": "Development;",
+          "StartupWMClass": "Parade"
+        }
+      }
+    },
+    "deb": {
+      "priority": "optional"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.developer-tools",
+      "identity": null
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Parade",
+      "uninstallDisplayName": "Parade ${version}"
+    }
+  }
+}

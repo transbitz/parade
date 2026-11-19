@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src *; frame-src *;">
+  <title>Parade - Devices</title>
+  <link rel="stylesheet" href="display.css">
+</head>
+<body>
+  <main class="workspace" id="workspace" aria-label="Device screens">
+    <div class="empty-state" id="emptyState">
+      <h2>No devices</h2>
+      <p>Use the control window to add device screens.</p>
+      <p class="hint">Screens appear side by side here. Tap <strong>⋯</strong> on a screen for URL and device controls.</p>
+    </div>
+  </main>
+  <div class="screen-scrollbar" id="screenScrollbar" title="Drag or click to move between screens">
+    <div class="screen-scrollbar-thumb" id="screenScrollbarThumb"></div>
+  </div>
+
+  <template id="panelTemplate">
+    <section class="panel" tabindex="0">
+      <div class="panel-bar">
+        <button class="panel-toggle" title="Controls">⋯</button>
+      </div>
+      <div class="panel-sizer">
+        <div class="panel-screen-wrap">
+          <div class="device-screen"></div>
+          <div class="panel-overlay">
+            <div class="panel-overlay-top">
+              <div class="panel-info">
+                <span class="panel-device-name"></span>
+                <span class="panel-dims"></span>
+              </div>
+              <div class="panel-actions">
+                <button class="icon-btn back-btn" title="Back">←</button>
+                <button class="icon-btn forward-btn" title="Forward">→</button>
+                <button class="icon-btn reload-btn" title="Reload">↻</button>
+                <button class="icon-btn rotate-btn" title="Rotate">⟳</button>
+                <button class="icon-btn devtools-btn" title="DevTools">⚙</button>
+                <button class="icon-btn duplicate-btn" title="Duplicate">⎘</button>
+                <button class="icon-btn hide-controls-btn" title="Hide controls">▾</button>
+                <button class="icon-btn close-btn danger" title="Close">×</button>
+              </div>
+            </div>
+            <div class="panel-overlay-url">
+              <input type="text" class="panel-url" spellcheck="false" placeholder="URL for this device">
+              <button class="go-btn panel-go-btn">Go</button>
+            </div>
+            <div class="panel-overlay-bottom">
+              <select class="panel-device-select" title="Change device"></select>
+              <span class="panel-status-text"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <script src="display.js"></script>
+</body>
+</html>

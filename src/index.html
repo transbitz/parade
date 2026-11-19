@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src *; frame-src *;">
+  <title>MultiBrowser</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="toolbar" id="toolbar">
+    <div class="toolbar-main">
+      <div class="brand" title="MultiBrowser">
+        <span class="brand-mark">▣</span>
+        <span class="brand-name">MultiBrowser</span>
+      </div>
+
+      <div class="controls">
+        <div class="control-group url-group">
+          <label for="urlInput">URL</label>
+          <input id="urlInput" type="text" placeholder="https://example.com or http://localhost:3000" spellcheck="false">
+        </div>
+
+        <div class="control-group">
+          <label for="deviceSelect">Device</label>
+          <select id="deviceSelect"></select>
+        </div>
+
+        <div class="control-group custom-size hidden" id="customSizeGroup">
+          <label>W × H</label>
+          <div class="inline-inputs">
+            <input id="customWidth" type="number" min="200" max="3000" value="390" aria-label="Custom width">
+            <span>×</span>
+            <input id="customHeight" type="number" min="200" max="3000" value="844" aria-label="Custom height">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="orientationSelect">Orient</label>
+          <select id="orientationSelect">
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="uaSelect">UA</label>
+          <select id="uaSelect">
+            <option value="default">Default</option>
+            <option value="iphone">iPhone</option>
+            <option value="android">Android</option>
+            <option value="ipad">iPad</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="scaleSelect">Scale</label>
+          <select id="scaleSelect">
+            <option value="fit" selected>Fit</option>
+            <option value="0.25">25%</option>
+            <option value="0.33">33%</option>
+            <option value="0.5">50%</option>
+            <option value="0.67">67%</option>
+            <option value="0.75">75%</option>
+            <option value="1">100%</option>
+          </select>
+        </div>
+
+        <div class="control-group actions">
+          <label>&nbsp;</label>
+          <div class="action-row">
+            <button id="addPanelBtn" class="primary" title="Add device panel">Add</button>
+            <button id="goSelectedBtn" title="Navigate selected panel (or all if none selected) to URL">Go</button>
+            <button id="navigateAllBtn" title="Navigate all panels to URL">Go all</button>
+            <button id="clearAllBtn" title="Close all panels">Clear</button>
+            <button id="toggleBarBtn" class="icon-btn bar-toggle" title="Hide toolbar">▴</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="showBarBtn" class="show-bar-btn hidden" title="Show toolbar">▾ Controls</button>
+  </header>
+
+  <main class="workspace" id="workspace" aria-label="Device screens">
+    <div class="empty-state" id="emptyState">
+      <h2>No devices</h2>
+      <p>Enter a URL, choose a device and scale, then click <strong>Add</strong>.</p>
+      <p class="hint">Click a screen to select it. Hover a screen for controls. Drag inside screens to scroll like a touchscreen.</p>
+    </div>
+  </main>
+
+  <template id="panelTemplate">
+    <section class="panel" tabindex="0">
+      <div class="panel-sizer">
+        <div class="panel-screen-wrap">
+          <webview class="device-screen" allowpopups></webview>
+          <button class="panel-toggle" title="Show controls">⋯</button>
+          <div class="panel-overlay">
+            <div class="panel-overlay-top">
+              <div class="panel-info">
+                <span class="panel-device-name"></span>
+                <span class="panel-dims"></span>
+              </div>
+              <div class="panel-actions">
+                <button class="icon-btn back-btn" title="Back">←</button>
+                <button class="icon-btn forward-btn" title="Forward">→</button>
+                <button class="icon-btn reload-btn" title="Reload">↻</button>
+                <button class="icon-btn rotate-btn" title="Rotate">⟳</button>
+                <button class="icon-btn devtools-btn" title="DevTools">⚙</button>
+                <button class="icon-btn duplicate-btn" title="Duplicate">⎘</button>
+                <button class="icon-btn hide-controls-btn" title="Hide controls">▾</button>
+                <button class="icon-btn close-btn danger" title="Close panel">×</button>
+              </div>
+            </div>
+            <div class="panel-overlay-url">
+              <input type="text" class="panel-url" spellcheck="false" placeholder="URL for this device">
+              <button class="go-btn panel-go-btn">Go</button>
+            </div>
+            <div class="panel-overlay-bottom">
+              <select class="panel-device-select" title="Change device"></select>
+              <span class="panel-status-text"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
