@@ -32,7 +32,7 @@ Grab the latest packages from the **[Releases page](https://github.com/transbitz
 | macOS (Intel) | `Parade-<version>-mac-x64.dmg` |
 | Debian / Ubuntu | `Parade-<version>-linux-amd64.deb` |
 | Fedora / RHEL | `Parade-<version>-linux-x86_64.rpm` |
-| Arch Linux | `Parade-<version>-linux-x86_64.pkg.tar.zst` |
+| Arch Linux | `Parade-<version>-linux-x86_64.pkg.tar.xz` |
 | Any Linux (universal) | `Parade-<version>-linux-x86_64.AppImage` |
 
 ### Install instructions
@@ -53,7 +53,7 @@ sudo dnf install ./Parade-<version>-linux-x86_64.rpm
 
 **Arch Linux**
 ```bash
-sudo pacman -U ./Parade-<version>-linux-x86_64.pkg.tar.zst
+sudo pacman -U ./Parade-<version>-linux-x86_64.pkg.tar.xz
 ```
 
 **Any Linux (AppImage)**
@@ -76,7 +76,7 @@ npm start            # run from source
 Package installers for your platform:
 
 ```bash
-npm run dist:linux   # .deb + .rpm + .AppImage + .pkg.tar.zst
+npm run dist:linux   # .deb + .rpm + .AppImage + .pkg.tar.xz
 npm run dist:win     # Windows NSIS .exe
 npm run dist:mac     # macOS .dmg + .zip
 ```

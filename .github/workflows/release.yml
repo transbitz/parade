@@ -56,10 +56,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Install rpm packaging tools
+      - name: Install rpm and pacman packaging tools
         run: sudo apt-get update && sudo apt-get install -y rpm libarchive-tools
-      - name: Build DEB, RPM and AppImage
-        run: npx electron-builder --linux deb rpm AppImage --publish never
+      - name: Build DEB, RPM, AppImage and Arch package
+        run: npx electron-builder --linux deb rpm AppImage pacman --publish never
+      - name: Rename Arch package to conventional .pkg.tar.xz
+        run: |
+          for f in release/*.pacman; do
+            [ -e "$f" ] || continue
+            mv "$f" "${f%.pacman}.pkg.tar.xz"
+          done
+          ls -la release/
       - uses: actions/upload-artifact@v4
         with:
           name: linux-packages
@@ -67,30 +74,11 @@ jobs:
             release/*.deb
             release/*.rpm
             release/*.AppImage
-          if-no-files-found: error
-
-  arch:
-    runs-on: ubuntu-latest
-    container: archlinux:latest
-    steps:
-      - name: Install build prerequisites
-        run: pacman -Syu --noconfirm --needed libarchive
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Build Arch package
-        run: npx electron-builder --linux pacman --publish never
-      - uses: actions/upload-artifact@v4
-        with:
-          name: arch-package
-          path: release/*.pkg.tar.*
+            release/*.pkg.tar.*
           if-no-files-found: error
 
   release:
-    needs: [windows, macos, linux, arch]
+    needs: [windows, macos, linux]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
