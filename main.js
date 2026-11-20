@@ -169,6 +169,7 @@ function createControlWindow() {
     minWidth: 360,
     minHeight: 440,
     backgroundColor: '#11141a',
+    icon: path.join(__dirname, 'build', 'icon.png'),
     title: 'Parade',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -201,6 +202,7 @@ function createDisplayWindow() {
     minWidth: 700,
     minHeight: 500,
     backgroundColor: '#0b0d11',
+    icon: path.join(__dirname, 'build', 'icon.png'),
     title: 'Parade - Devices',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

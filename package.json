@@ -1,7 +1,7 @@
 {
   "name": "parade",
   "productName": "Parade",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Desktop multi-panel mobile device emulator for testing webapps side by side",
   "main": "main.js",
   "desktopName": "Parade",
@@ -45,6 +45,7 @@
       "src/display.html",
       "src/display.css",
       "src/display.js",
+      "build/icon.png",
       "package.json"
     ],
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
@@ -70,7 +71,8 @@
       }
     },
     "deb": {
-      "priority": "optional"
+      "priority": "optional",
+      "afterInstall": "build/after-install.sh"
     },
     "mac": {
       "target": [
